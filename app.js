@@ -15,7 +15,16 @@ let cart = [];
 
 // getting the products data.....
 class Products {
+  async getProducts() {
+    try {
+      let result = await fetch('products.json')
+      let data = await result.json();
+      return data;
+    } catch (error) {
+      console.log(error)
+    }
 
+  }
 }
 
 // display products fetching the products data with logic
@@ -28,8 +37,11 @@ class Storage {
 
 }
 
-// events trigger calling functions and methods
+// events trigger calling functions and running methods
 document.addEventListener('DOMContentLoaded', () => {
   const ui = new UI()
   const products = new Products()
+
+  //get all products
+  products.getProducts().then(data => console.log(data))
 });
